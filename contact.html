@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Call — Dan Rogers AI Consulting | Williamsburg, VA</title>
-  <meta name="description" content="Book a free 20-minute intro call or an AI Opportunity Assessment with Dan Rogers." />
+  <meta name="description" content="Book a free 20-minute intro call or an AI Opportunity Assessment with Dan Rogers. No pitch, just honest conversation." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
     .contact-hero {
-      padding: 10rem 2rem 4rem;
+      padding: 10rem 2rem 5rem;
       text-align: center;
     }
 
@@ -27,23 +27,29 @@
     .contact-hero p {
       font-size: 1.05rem;
       color: var(--gray-300);
-      max-width: 520px;
+      max-width: 500px;
       margin: 0 auto;
       line-height: 1.75;
     }
 
+    /* SMOOTH TRANSITION TO LIGHT */
+    .section-bridge {
+      height: 60px;
+      background: linear-gradient(to bottom, var(--navy), #f8f9fb);
+    }
+
+    /* BOOKING BLOCKS */
     .booking-block {
       background: #f8f9fb;
-      border-top: 1px solid #e5e7eb;
       padding: 4rem 2rem 5rem;
     }
 
     .booking-block + .booking-block {
-      border-top: 2px solid #e5e7eb;
+      border-top: 2px solid #e2e8f0;
     }
 
     .booking-inner {
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
@@ -65,48 +71,87 @@
     }
 
     .booking-tag.paid {
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid rgba(59,130,246,0.3);
+      color: #1d4ed8;
+      background: #dbeafe;
+      border: 1px solid #93c5fd;
     }
 
     .booking-heading {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: #0a0f1e;
       letter-spacing: -0.025em;
       margin-bottom: 0.5rem;
+      line-height: 1.2;
     }
 
     .booking-subtext {
       font-size: 0.95rem;
       color: #4b5563;
       margin-bottom: 2rem;
-      line-height: 1.65;
-      max-width: 640px;
+      line-height: 1.7;
+      max-width: 600px;
     }
 
-    .calendar-wrap {
-      background: #fff;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 8px;
+    .calendar-frame {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 6px;
     }
 
-    .calendar-wrap iframe {
+    .calendar-frame iframe {
       display: block;
-      border-radius: 4px;
+      border-radius: 6px;
     }
 
+    /* WHAT HAPPENS NEXT */
+    .what-next {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .next-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .next-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .next-item p {
+      font-size: 0.82rem;
+      color: #6b7280;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .next-item strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 0.15rem;
+    }
+
+    /* EMAIL FOOTER */
     .email-section {
       background: var(--navy-mid);
       border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 3rem 2rem;
+      padding: 2.5rem 2rem;
       text-align: center;
     }
 
     .email-section p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--gray-400);
     }
 
@@ -115,9 +160,8 @@
     }
 
     @media (max-width: 640px) {
-      .booking-block {
-        padding: 3rem 1.25rem 3rem;
-      }
+      .booking-block { padding: 3rem 1.25rem 3.5rem; }
+      .what-next { flex-direction: column; }
     }
   </style>
 </head>
@@ -137,30 +181,20 @@
   <!-- HERO -->
   <section class="contact-hero">
     <div class="hero-eyebrow">Let's Talk</div>
-    <h1>Pick the Right <span class="highlight">Next Step</span></h1>
+    <h1>Two Ways to <span class="highlight">Get Started</span></h1>
     <p>
-      Not sure where to start? Book a free 20-minute intro call.
-      Already know you want the Assessment? Go straight to booking it below.
+      Not sure if AI is right for your business? Start with the free call — 20 minutes, honest answers, zero obligation.
+      Already convinced? Book the Assessment directly below.
     </p>
   </section>
+
+  <!-- GRADIENT BRIDGE -->
+  <div class="section-bridge"></div>
 
   <!-- INTRO CALL -->
   <div class="booking-block" id="intro">
     <div class="booking-inner">
-      <span class="booking-tag free">Free · 20 Minutes</span>
-      <h2 class="booking-heading">Free Intro Call</h2>
-      <p class="booking-subtext">A quick, no-pressure conversation to make sure we're a good fit. We'll talk through your business, where the friction is, and whether the Assessment makes sense for you.</p>
-      <div class="calendar-wrap">
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2aIgBy1RwSeVgmhYrechrUGmeLyMgsx4Te1tJi3iaeDuYRFBhURzpnbYGKMyaiAJz1ZdMsewhZ?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-        <!-- end Google Calendar Appointment Scheduling -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ASSESSMENT -->
-  <div class="booking-block" id="assessment">
-    <div class="booking-inner">
-      <span class="booking-tag paid">Starting at $1,000</span>
-      <h2 class="booking-heading">AI Opportunity Assessment</h2>
-      <p class="booking-subtext">A 90-minute deep dive into your business followed by a written Opportunity Map — your top 3–5 AI use cases ranked by impact and effort, plus a recorded walkthrough. Delivered within 7 days
+      <span class="booking-tag free">Free · 20 Minutes · No Obligation</span>
+      <h2 class="booking-heading">Start With a Free Intro Call</h2>
+      <p class="booking-subtext">
+        We'll talk through your business, w
