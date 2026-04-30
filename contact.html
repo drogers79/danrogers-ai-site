@@ -33,28 +33,53 @@
     }
 
     .booking-section {
-      padding: 3rem 2rem 6rem;
+      padding: 0;
+      background: #f8f9fb;
+      border-top: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .booking-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    .booking-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-heading {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0a0f1e;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
     }
 
     .booking-wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--navy-light);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
       overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
 
     .booking-wrap iframe {
       display: block;
-      background: transparent;
     }
 
     .what-to-expect {
-      max-width: 900px;
-      margin: 2.5rem auto 0;
+      max-width: 960px;
+      margin: 2rem auto 0;
+      padding: 0 2rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
     }
 
@@ -62,33 +87,47 @@
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
-      padding: 1.25rem;
-      background: var(--navy-mid);
-      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.1rem 1.25rem;
+      background: #fff;
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
     }
 
     .expect-icon {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       flex-shrink: 0;
       margin-top: 0.1rem;
     }
 
     .expect-item h4 {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 700;
+      color: #0a0f1e;
       margin-bottom: 0.2rem;
     }
 
     .expect-item p {
-      font-size: 0.82rem;
-      color: var(--gray-400);
+      font-size: 0.8rem;
+      color: #4b5563;
       line-height: 1.55;
     }
 
+    .expect-item a {
+      color: var(--accent);
+    }
+
+    .expect-section {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 0 4rem;
+    }
+
     @media (max-width: 640px) {
-      .booking-section {
-        padding: 2rem 1.25rem 4rem;
+      .booking-inner {
+        padding: 3rem 1.25rem 3rem;
+      }
+      .what-to-expect {
+        padding: 0 1.25rem;
       }
     }
   </style>
@@ -119,12 +158,19 @@
 
   <!-- BOOKING EMBED -->
   <section class="booking-section">
-    <div class="booking-wrap">
-      <!-- Google Calendar Appointment Scheduling begin -->
-      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0qZuukkTZaCSzdaaPm2NtTp18hjWKJFKn4BgaPhgpUSWONy0YVdkPfGqdIxtdV4zmF7SA1NNEa?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-      <!-- end Google Calendar Appointment Scheduling -->
+    <div class="booking-inner">
+      <p class="booking-label">Schedule Your Session</p>
+      <h2 class="booking-heading">Pick a time that works for you</h2>
+      <div class="booking-wrap">
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0qZuukkTZaCSzdaaPm2NtTp18hjWKJFKn4BgaPhgpUSWONy0YVdkPfGqdIxtdV4zmF7SA1NNEa?gv=true" style="border: 0" width="100%" height="750" frameborder="0"></iframe>
+        <!-- end Google Calendar Appointment Scheduling -->
+      </div>
     </div>
+  </section>
 
+  <!-- WHAT TO EXPECT -->
+  <div class="expect-section">
     <div class="what-to-expect">
       <div class="expect-item">
         <div class="expect-icon">🗓️</div>
@@ -133,35 +179,3 @@
           <p>A focused conversation about your business, your team, and where time gets lost.</p>
         </div>
       </div>
-      <div class="expect-item">
-        <div class="expect-icon">📋</div>
-        <div>
-          <h4>Opportunity Map in 7 Days</h4>
-          <p>A written report with your top AI opportunities, ranked by impact and effort.</p>
-        </div>
-      </div>
-      <div class="expect-item">
-        <div class="expect-icon">🎙️</div>
-        <div>
-          <h4>Recorded Walkthrough</h4>
-          <p>A recorded summary you can share with your team or partners.</p>
-        </div>
-      </div>
-      <div class="expect-item">
-        <div class="expect-icon">✉️</div>
-        <div>
-          <h4>Or Just Email</h4>
-          <p>Prefer to reach out first? <a href="mailto:contact@danrogers.ai">contact@danrogers.ai</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Dan Rogers · <a href="mailto:contact@danrogers.ai">contact@danrogers.ai</a> · Williamsburg, VA</p>
-  </footer>
-
-  <script src="js/main.js"></script>
-</body>
-</html>
