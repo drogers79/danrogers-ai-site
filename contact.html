@@ -71,11 +71,13 @@
       background: #f8f9fb;
       border-top: 1px solid #e5e7eb;
       border-bottom: 1px solid #e5e7eb;
-      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
     .booking-section.active {
-      display: block;
+      max-height: 1400px;
     }
 
     .booking-inner {
@@ -202,5 +204,4 @@
     </p>
 
     <!-- TOGGLE -->
-    <div class="booking-toggle">
-      <button class="toggle-btn active" 
+    <
