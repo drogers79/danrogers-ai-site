@@ -32,7 +32,6 @@
       line-height: 1.75;
     }
 
-    /* BOOKING BLOCKS */
     .booking-block {
       background: #f8f9fb;
       border-top: 1px solid #e5e7eb;
@@ -87,19 +86,18 @@
       max-width: 640px;
     }
 
-    .booking-wrap {
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      overflow: hidden;
+    .calendar-wrap {
       background: #fff;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 8px;
     }
 
-    .booking-wrap iframe {
+    .calendar-wrap iframe {
       display: block;
+      border-radius: 4px;
     }
 
-    /* EMAIL FALLBACK */
     .email-section {
       background: var(--navy-mid);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -116,65 +114,9 @@
       color: var(--accent-bright);
     }
 
-    .assessment-cta-wrap {
-      background: #fff;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      padding: 2.5rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-
-    .assessment-details {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    .assessment-detail-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .assessment-detail-icon {
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
-    }
-
-    .assessment-detail-item strong {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #0a0f1e;
-      margin-bottom: 0.2rem;
-    }
-
-    .assessment-detail-item p {
-      font-size: 0.85rem;
-      color: #4b5563;
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    .assessment-book-btn {
-      display: inline-block;
-      margin-bottom: 0.6rem;
-    }
-
-    .assessment-note {
-      font-size: 0.78rem;
-      color: #9ca3af;
-      margin: 0;
-    }
-
     @media (max-width: 640px) {
       .booking-block {
         padding: 3rem 1.25rem 3rem;
-      }
-      .assessment-cta-wrap {
-        padding: 1.75rem 1.25rem;
       }
     }
   </style>
@@ -205,4 +147,20 @@
   <!-- INTRO CALL -->
   <div class="booking-block" id="intro">
     <div class="booking-inner">
-      <span class="booking-tag free">Free · 2
+      <span class="booking-tag free">Free · 20 Minutes</span>
+      <h2 class="booking-heading">Free Intro Call</h2>
+      <p class="booking-subtext">A quick, no-pressure conversation to make sure we're a good fit. We'll talk through your business, where the friction is, and whether the Assessment makes sense for you.</p>
+      <div class="calendar-wrap">
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2aIgBy1RwSeVgmhYrechrUGmeLyMgsx4Te1tJi3iaeDuYRFBhURzpnbYGKMyaiAJz1ZdMsewhZ?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+        <!-- end Google Calendar Appointment Scheduling -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <div class="booking-block" id="assessment">
+    <div class="booking-inner">
+      <span class="booking-tag paid">Starting at $1,000</span>
+      <h2 class="booking-heading">AI Opportunity Assessment</h2>
+      <p class="booking-subtext">A 90-minute deep dive into your business followed by a written Opportunity Map — your top 3–5 AI use cases ranked by impact and effort, plus a recorded walkthrough. Delivered within 7 days
