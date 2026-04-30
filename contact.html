@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Call — Dan Rogers AI Consulting | Williamsburg, VA</title>
-  <meta name="description" content="Book an AI Opportunity Assessment or intro call with Dan Rogers. Find out where AI can make a real difference in your business." />
+  <meta name="description" content="Book a free 20-minute intro call or go straight to booking an AI Opportunity Assessment with Dan Rogers." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -28,15 +28,54 @@
       font-size: 1.05rem;
       color: var(--gray-300);
       max-width: 520px;
-      margin: 0 auto;
+      margin: 0 auto 2.5rem;
       line-height: 1.75;
     }
 
+    /* OPTION TOGGLE */
+    .booking-toggle {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 2rem 2rem;
+    }
+
+    .toggle-btn {
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: var(--gray-300);
+    }
+
+    .toggle-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .toggle-btn:hover:not(.active) {
+      border-color: var(--accent-bright);
+      color: var(--white);
+    }
+
+    /* BOOKING SECTIONS */
     .booking-section {
       padding: 0;
       background: #f8f9fb;
       border-top: 1px solid #e5e7eb;
       border-bottom: 1px solid #e5e7eb;
+      display: none;
+    }
+
+    .booking-section.active {
+      display: block;
     }
 
     .booking-inner {
@@ -59,7 +98,14 @@
       font-weight: 800;
       color: #0a0f1e;
       letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-subtext {
+      font-size: 0.9rem;
+      color: #4b5563;
       margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
     .booking-wrap {
@@ -72,6 +118,13 @@
 
     .booking-wrap iframe {
       display: block;
+    }
+
+    /* WHAT TO EXPECT */
+    .expect-section {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 0 4rem;
     }
 
     .what-to-expect {
@@ -116,12 +169,6 @@
       color: var(--accent);
     }
 
-    .expect-section {
-      background: #f8f9fb;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 0 0 4rem;
-    }
-
     @media (max-width: 640px) {
       .booking-inner {
         padding: 3rem 1.25rem 3rem;
@@ -148,34 +195,12 @@
   <!-- HERO -->
   <section class="contact-hero">
     <div class="hero-eyebrow">Let's Talk</div>
-    <h1>Book Your <span class="highlight">AI Opportunity Assessment</span></h1>
+    <h1>Pick the Right <span class="highlight">Next Step</span></h1>
     <p>
-      Pick a time that works for you. We'll start with a 90-minute conversation
-      about your business — no pitch, no pressure, just an honest look at where
-      AI can actually help.
+      Not sure where to start? Book a free 20-minute intro call.
+      Already know you want the Assessment? Go straight to booking it.
     </p>
-  </section>
 
-  <!-- BOOKING EMBED -->
-  <section class="booking-section">
-    <div class="booking-inner">
-      <p class="booking-label">Schedule Your Session</p>
-      <h2 class="booking-heading">Pick a time that works for you</h2>
-      <div class="booking-wrap">
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0qZuukkTZaCSzdaaPm2NtTp18hjWKJFKn4BgaPhgpUSWONy0YVdkPfGqdIxtdV4zmF7SA1NNEa?gv=true" style="border: 0" width="100%" height="750" frameborder="0"></iframe>
-        <!-- end Google Calendar Appointment Scheduling -->
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT TO EXPECT -->
-  <div class="expect-section">
-    <div class="what-to-expect">
-      <div class="expect-item">
-        <div class="expect-icon">🗓️</div>
-        <div>
-          <h4>90-Minute Session</h4>
-          <p>A focused conversation about your business, your team, and where time gets lost.</p>
-        </div>
-      </div>
+    <!-- TOGGLE -->
+    <div class="booking-toggle">
+      <button class="toggle-btn active" 

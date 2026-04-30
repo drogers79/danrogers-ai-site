@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Opportunity Quiz — Dan Rogers AI Consulting</title>
+  <meta name="description" content="Answer 5 quick questions and find out where AI can make the biggest difference in your business." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .quiz-page {
+      min-height: 100vh;
+      padding: 9rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .quiz-header {
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .quiz-header h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-header p {
+      font-size: 1rem;
+      color: var(--gray-300);
+      line-height: 1.7;
+    }
+
+    /* PROGRESS BAR */
+    .progress-wrap {
+      width: 100%;
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin-bottom: 0.6rem;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--navy-light);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    /* QUESTION CARD */
+    .question-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--navy-mid);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: none;
+    }
+
+    .question-card.active {
+      display: block;
+      animation: fadeSlide 0.3s ease;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-number {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 1.75rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-align: left;
+      width: 100%;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .option:hover {
+      border-color: rgba(59,130,246,0.4);
+      background: rgba(59,130,246,0.06);
+    }
+
+    .option.selected {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.12);
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gray-400);
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .option.selected .option-letter {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 2rem;
+    }
+
+    .btn-next {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.2s, opacity 0.2s;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .btn-next.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn-next.enabled:hover {
+      background: var(--accent-bright);
+    }
+
+    /* RESULTS */
+    .results-card {
+      width: 100%;
+      max-width: 640px;
+      display: none;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    .results-card.active {
+      display: block;
+    }
+
+    .result-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .result-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .result-summary {
+      font-size: 1rem;
+      color: var(--gray-300);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .result-areas {
+      background: var(--navy-mid);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .result-areas h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 1rem;
+    }
+
+    .area-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .area-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--gray-300);
+    }
+
+    .area-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .result-cta-box {
+      background: linear-gradient(135deg, #0f2040, #1a2a40);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .result-cta-box h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-cta-box p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .result-cta-box .btn-primary {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+
+    .result-cta-box .skip-link {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--gray-400);
+    }
+
+    .result-cta-box .skip-link a {
+      color: var(--gray-400);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .quiz-page {
+        padding: 7rem 1.25rem 4rem;
+      }
+      .question-card {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">dan<span>rogers</span>.ai</a>
+    <ul class="nav-links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book a Call</a></li>
+    </ul>
+  </nav>
+
+  <div class="quiz-page">
+
+    <!-- HEADER -->
+    <div class="quiz-header">
+      <div class="hero-eyebrow">3-Minute Quiz</div>
+      <h1>Where Can AI <span class="highlight">Help Your Business?</span></h1>
+      <p>Answer 5 quick questions and find out which AI opportunities are most relevant to you — before talking to anyone.</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="progress-label">Question 1 of 5</span>
+        <span id="progress-pct">0% complete</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-card active" id="q1">
+      <div class="question-number">Question 1 of 5</div>
+      <p class="question-text">How many people work in your business?</p>
+      <div class="options">
+        <button class="option" data-q="1" data-val="solo">
+          <span class="option-letter">A</span> Just me
+        </button>
+        <button class="option" data-q="1" data-val="small">
+          <span class="option-letter">B</span> 2–10 people
+        </button>
+        <button class="option" data-q="1" data-val="medium">
+          <span class="option-letter">C</span> 11–50 people
+        </button>
+        <button class="option" data-q="1" data-val="large">
+          <span class="option-letter">D</span> 50+ people
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="next-1" onclick="nextQuestion(1)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="q2">
+      <div class="question-number">Question 2 of 5</div>
+      <p class="question-text">Where does your team lose the most time each week?</p>
+      <div class="options">
+        <button class="option" data-q="2" data-val="comms">
+          <span class="option-letter">A</span> Customer communication and follow-ups
+        </button>
+        <button class="option" data-q="2" data-val="admin">
+          <span class="option-letter">B</span> Admin work, paperwork, or data entry
+        </button>
+        <button class="option" data-q="2" data-val="marketing">
+          <span class="option-letter">C</span> Creating content or running marketing
+        </button>
+        <button class="option" data-q="2" data-val="reporting">
+          <span class="option-letter">D</span> Reporting, analysis, or tracking numbers
+        </button>
+        <button class="option" data-q="2" data-val="scheduling">
+          <span class="option-letter">E</span> Scheduling, coordination, or project management
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="next-2" onclick="nextQuestion(2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="q3">
+      <div class="question-number">Question 3 of 5</div>
+      <p class="question-text">Are you currently using any AI tools in your business?</p>
+      <div class="options">
+        <button class="option" data-q="3" data-val="none">
+          <span class="option-letter">A</span> No — not sure where to start
+        </button>
+        <button class="option" data-q="3" data-val="basic">
+          <span class="option-letter">B</span> A little — maybe ChatGPT occasionally
+        </button>
+        <button class="option" data-q="3" data-val="some">
+          <span class="option-letter">C</span> Yes, a few tools but nothing systematic
+        </button>
+        <button class="option" data-q="3" data-val="active">
+          <span class="option-letter">D</span> Yes, actively — looking to do more
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="next-3" onclick="nextQuestion(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="q4">
+      <div class="question-number">Question 4 of 5</div>
+      <p class="question-text">What's your biggest business priority in the next 12 months?</p>
+      <div class="options">
+        <button class="option" data-q="4" data-val="costs">
+          <span class="option-letter">A</span> Cut costs and reduce overhead
+        </button>
+        <button class="option" data-q="4" data-val="revenue">
+          <span class="option-letter">B</span> Grow revenue and bring in more customers
+        </button>
+        <button class="option" data-q="4" data-val="time">
+          <span class="option-letter">C</span> Free up my time — I'm stretched too thin
+        </button>
+        <button class="option" data-q="4" data-val="cx">
+          <span class="option-letter">D</span> Improve the customer experience
+        </button>
+        <button class="option" data-q="4" data-val="competitive">
+          <span class="option-letter">E</span> Stay ahead of the competition
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="next-4" onclick="nextQuestion(4)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="q5">
+      <div class="question-number">Question 5 of 5</div>
+      <p class="question-text">How would you describe your team's openness to new technology?</p>
+      <div class="options">
+        <button class="option" data-q="5" data-val="resistant">
+          <span class="option-letter">A</span> Pretty resistant — change is hard here
+        </button>
+        <button class="option" data-q="5" data-val="cautious">
+          <span class="option-letter">B</span> Cautious but open if it clearly helps
+        </button>
+        <button class="option" data-q="5" data-val="ready">
+          <span class="option-letter">C</span> Ready — we adopt new tools regularly
+        </button>
+        <button class="option" data-q="5" data-val="eager">
+          <span class="option-letter">D</span> Eager — we're already looking for this
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-next" id="next-5" onclick="showResults()">See My Results →</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-card" id="results">
+      <div class="result-badge">Your Results</div>
+      <h2 class="result-title" id="result-title"></h2>
+      <p class="result-summary" id="result-summary"></p>
+
+      <div class="result-areas">
+        <h3>Your Top AI Opportunities</h3>
+        <div class="area-list" id="result-areas"></div>
+      </div>
+
+      <div class="result-cta-box">
+        <h3>Ready to Find Out Exactly What This Looks Like for You?</h3>
+        <p>Book a free 20-minute intro call. We'll talk through your results and see if an AI Opportunity Assessment makes sense.</p>
+        <a href="contact.html" class="btn-primary">Book Your Free Intro Call →</a>
+        <p class="skip-link">Already convinced? <a href="services.html#assessment">Skip ahead to the Assessment →</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Dan Rogers · <a href="mailto:contact@danrogers.ai">contact@danrogers.ai</a> · Williamsburg, VA</p>
+  </footer>
+
+  <script>
+    const answers = {};
+
+    // Option selection
+    document.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const q = this.dataset.q;
+        // Deselect others in same question
+        document.querySelectorAll(`.option[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        answers[q] = this.dataset.val;
+        // Enable next button
+        const nextBtn = document.getElementById(`next-${q}`);
+        if (nextBtn) nextBtn.classList.add('enabled');
+      });
+    });
+
+    function nextQuestion(current) {
+      if (!answers[current]) return;
+      document.getElementById(`q${current}`).classList.remove('active');
+      document.getElementById(`q${current + 1}`).classList.add('active');
+      updateProgress(current + 1);
+    }
+
+    function updateProgress(step) {
+      const pct = Math.round(((step - 1) / 5) * 100);
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = `Question ${step} of 5`;
+      document.getElementById('progress-pct').textContent = pct + '% complete';
+    }
+
+    function showResults() {
+      if (!answers[5]) return;
+
+      // Hide last question
+      document.getElementById('q5').classList.remove('active');
+
+      // Update progress to 100%
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = 'Complete';
+      document.getElementById('progress-pct').textContent = '100% complete';
+
+      // Compute results
+      const timeArea = answers[2];
+      const priority = answers[4];
+      const aiLevel = answers[3];
+
+      // Title and summary based on pain point + priority
+      let title, summary;
+      const aiMap = {
+        none: 'starting from scratch',
+        basic: 'just getting started with AI',
+        some: 'already experimenting',
+        active: 'ready to scale up'
+      };
+      const aiDesc = aiMap[aiLevel] || 'getting started';
+
+      if (priority === 'time') {
+        title = 'You Have Clear Automation Wins Waiting.';
+        summary = `You're stretched thin and ${aiDesc} — which is actually the ideal starting point. The businesses that save the most time with AI are the ones that know where the drain is. Based on your answers, there are specific workflows we can target to give you hours back each week.`;
+      } else if (priority === 'revenue') {
+        title = 'AI Can Help You Grow Without Adding Overhead.';
+        summary = `Growing revenue without hiring more people is one of AI's strongest use cases. You're ${aiDesc}, and your answers point to real opportunities to attract more customers, follow up faster, and convert more of what's already coming in.`;
+      } else if (priority === 'costs') {
+        title = 'There Are Probably Costs You Can Automate Away.';
+        summary = `Reducing overhead is one of the clearest AI wins for growing businesses. You're ${aiDesc}, and based on where your team loses time, there are likely repetitive tasks eating real money that don't need a human touch.`;
+      } else if (priority === 'cx') {
+        title = 'AI Can Make Your Customer Experience Feel Bigger Than Your Team.';
+        summary = `Improving how customers experience your business — faster responses, fewer dropped balls, more consistent communication — is exactly what AI does well. You're ${aiDesc}, and your operation sounds like it's ready for this.`;
+      } else {
+        title = 'You\'re in a Good Position to Pull Ahead.';
+        summary = `Staying competitive means moving before your industry makes AI table stakes. You're ${aiDesc}, and based on your answers, there are a handful of high-leverage places where getting ahead now will be hard to close later.`;
+      }
+
+      // Build opportunity list from answers
+      const areaMap = {
+        comms: 'Customer communication & automated follow-ups',
+        admin: 'Admin automation & document processing',
+        marketing: 'AI-assisted content & marketing',
+        reporting: 'Automated reporting & data analysis',
+        scheduling: 'Scheduling & workflow coordination'
+      };
+
+      const areas = [];
+      if (timeArea && areaMap[timeArea]) areas.push(areaMap[timeArea]);
+
+      // Add a second based on priority
+      const priorityAreas = {
+        revenue: 'Lead generation & sales automation',
+        costs: 'Process automation to reduce manual work',
+        time: 'AI tools to handle routine tasks',
+        cx: 'Customer-facing chatbots & response automation',
+        competitive: 'Competitive intelligence & market monitoring'
+      };
+      if (priority && priorityAreas[priority] && priorityAreas[priority] !== areas[0]) {
+        areas.push(priorityAreas[priority]);
+      }
+
+      // Always add Assessment as an area
+      areas.push('AI Opportunity Assessment to map all of the above');
+
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-summary').textContent = summary;
+
+      const areaEl = document.getElementById('result-areas');
+      areaEl.innerHTML = areas.map(a => `
+        <div class="area-item">
+          <div class="area-dot"></div>
+          <span>${a}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('results').classList.add('active');
+    }
+  </script>
+</body>
+</html>
