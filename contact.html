@@ -10,19 +10,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
-    .contact-hero {
-      padding: 10rem 2rem 5rem;
-      text-align: center;
+    .contact-page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 9rem 2rem 6rem;
     }
-    .contact-hero h1 {
-      font-size: clamp(1.9rem, 4vw, 3rem);
+
+    .contact-heading {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .contact-heading h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.15;
-      max-width: 640px;
-      margin: 0 auto 1.25rem;
+      margin-bottom: 1rem;
     }
-    .contact-hero p {
+
+    .contact-heading p {
       font-size: 1.05rem;
       color: var(--gray-300);
       max-width: 500px;
@@ -30,26 +37,18 @@
       line-height: 1.75;
     }
 
-    /* Identical structure to the working diagnostic page */
-    .contact-body {
-      background: #f8f9fb;
-      border-top: 1px solid #e2e8f0;
-      padding: 5rem 2rem;
-    }
-    .contact-body-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
     .cal-block {
       margin-bottom: 5rem;
       padding-bottom: 5rem;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
+
     .cal-block:last-child {
       margin-bottom: 0;
       padding-bottom: 0;
       border-bottom: none;
     }
+
     .cal-tag {
       display: inline-block;
       font-size: 0.72rem;
@@ -60,74 +59,89 @@
       border-radius: 100px;
       margin-bottom: 0.75rem;
     }
+
     .cal-tag.free {
       color: #059669;
       background: #d1fae5;
       border: 1px solid #6ee7b7;
     }
+
     .cal-tag.paid {
-      color: #1d4ed8;
-      background: #dbeafe;
-      border: 1px solid #93c5fd;
+      color: var(--accent-bright);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
     }
+
     .cal-block h2 {
       font-size: 1.7rem;
       font-weight: 800;
-      color: #0a0f1e;
       letter-spacing: -0.025em;
       margin-bottom: 0.5rem;
     }
+
     .cal-block p.desc {
       font-size: 0.95rem;
-      color: #4b5563;
+      color: var(--gray-300);
       margin-bottom: 1.5rem;
       line-height: 1.7;
-      max-width: 600px;
+      max-width: 640px;
     }
+
     .cal-block iframe {
       display: block;
       width: 100%;
       height: 600px;
       background: white;
     }
+
     .cal-meta {
       display: flex;
       gap: 1.5rem;
-      margin-top: 1.25rem;
+      margin-top: 1.5rem;
       flex-wrap: wrap;
     }
+
     .cal-meta-item {
       display: flex;
       align-items: flex-start;
       gap: 0.6rem;
       min-width: 150px;
     }
-    .cal-meta-item span.icon { font-size: 1rem; margin-top: 2px; }
+
+    .cal-meta-item .icon {
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
     .cal-meta-item strong {
       display: block;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: #374151;
+      color: var(--white);
+      margin-bottom: 0.1rem;
     }
+
     .cal-meta-item p {
       font-size: 0.8rem;
-      color: #6b7280;
+      color: var(--gray-400);
       line-height: 1.5;
       margin: 0;
     }
 
-    .email-row {
-      background: var(--navy-mid);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 2.5rem 2rem;
+    .contact-email {
       text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
       font-size: 0.9rem;
       color: var(--gray-400);
     }
-    .email-row a { color: var(--accent-bright); }
+
+    .contact-email a {
+      color: var(--accent-bright);
+    }
 
     @media (max-width: 640px) {
-      .contact-body { padding: 3rem 1.25rem; }
+      .contact-page { padding: 7rem 1.25rem 4rem; }
       .cal-meta { flex-direction: column; }
     }
   </style>
@@ -145,24 +159,20 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section class="contact-hero">
-    <div class="hero-eyebrow">Let's Talk</div>
-    <h1>Two Ways to <span class="highlight">Get Started</span></h1>
-    <p>
-      Not sure if AI is right for your business? Start with the free call —
-      20 minutes, honest answers, zero obligation. Already convinced?
-      Book the Assessment directly below.
-    </p>
-  </section>
+  <div class="contact-page">
 
-  <!-- CALENDARS — same structure as working diagnostic -->
-  <div class="contact-body">
-    <div class="contact-body-inner">
+    <!-- HEADING -->
+    <div class="contact-heading">
+      <div class="hero-eyebrow">Let's Talk</div>
+      <h1>Two Ways to <span class="highlight">Get Started</span></h1>
+      <p>Not sure if AI is right for your business? Start with the free call — 20 minutes, honest answers, zero obligation. Already convinced? Book the Assessment directly below.</p>
+    </div>
 
-      <div class="cal-block" id="intro">
-        <span class="cal-tag free">Free · 20 Minutes · No Obligation</span>
-        <h2>Start With a Free Intro Call</h2>
-        <p class="desc">We'll talk through your business, where your time goes, and whether AI is genuinely a fit for you right now. If it's not the right time, I'll tell you that too. No pitch, no agenda — just an honest conversation.</p>
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedule
+    <!-- FREE INTRO CALL -->
+    <div class="cal-block" id="intro">
+      <span class="cal-tag free">Free · 20 Minutes · No Obligation</span>
+      <h2>Start With a Free Intro Call</h2>
+      <p class="desc">We'll talk through your business, where your time goes, and whether AI is genuinely a fit for you right now. If it's not the right time, I'll tell you that too. No pitch, no agenda — just an honest conversation.</p>
+      <!-- Google Calendar Appointment Scheduling begin -->
+      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2aIgBy1RwSeVgmhYrechrUGmeLyMgsx4Te1tJi3iaeDuYRFBhURzpnbYGKMyaiAJz1ZdMsewhZ?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+      <!-- end Goo
