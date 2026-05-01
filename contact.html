@@ -88,12 +88,14 @@
       max-width: 600px;
     }
 
-    /* IFRAME — no wrapper div, styled directly */
+    /* IFRAME — explicit dimensions required due to global CSS reset */
     .booking-inner iframe {
       display: block;
-      width: 100%;
+      width: 100% !important;
+      height: 600px !important;
+      min-height: 600px;
       background: #fff;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #e2e8f0 !important;
     }
 
     /* CONTEXT ITEMS */
@@ -177,5 +179,4 @@
       <span class="booking-tag free">Free · 20 Minutes · No Obligation</span>
       <h2 class="booking-heading">Start With a Free Intro Call</h2>
       <p class="booking-subtext">
-        We'll talk through your business, where your time goes, and whether AI is
-        genuinely a fit for y
+        We'
