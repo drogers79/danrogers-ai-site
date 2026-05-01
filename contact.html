@@ -175,4 +175,70 @@
       <p class="desc">We'll talk through your business, where your time goes, and whether AI is genuinely a fit for you right now. If it's not the right time, I'll tell you that too. No pitch, no agenda — just an honest conversation.</p>
       <!-- Google Calendar Appointment Scheduling begin -->
       <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2aIgBy1RwSeVgmhYrechrUGmeLyMgsx4Te1tJi3iaeDuYRFBhURzpnbYGKMyaiAJz1ZdMsewhZ?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-      <!-- end Goo
+      <!-- end Google Calendar Appointment Scheduling -->
+      <div class="cal-meta">
+        <div class="cal-meta-item">
+          <span class="icon">💬</span>
+          <div><strong>20 minutes</strong><p>Quick enough to fit in a lunch break.</p></div>
+        </div>
+        <div class="cal-meta-item">
+          <span class="icon">🚫</span>
+          <div><strong>No sales pitch</strong><p>If it's not a fit, I'll say so upfront.</p></div>
+        </div>
+        <div class="cal-meta-item">
+          <span class="icon">📍</span>
+          <div><strong>Local focus</strong><p>Williamsburg &amp; surrounding Virginia, virtual too.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI OPPORTUNITY ASSESSMENT -->
+    <div class="cal-block" id="assessment">
+      <span class="cal-tag paid">Starting at $1,000</span>
+      <h2>Book the AI Opportunity Assessment</h2>
+      <p class="desc">Already know you want a clear picture of where AI fits in your business? A 90-minute deep dive followed by a written Opportunity Map — your top AI use cases ranked by impact and effort, with a recorded walkthrough. Delivered within 7 days.</p>
+      <!-- Google Calendar Appointment Scheduling begin -->
+      <iframe id="cal-assessment" src="" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+      <!-- end Google Calendar Appointment Scheduling -->
+      <div class="cal-meta">
+        <div class="cal-meta-item">
+          <span class="icon">🗓️</span>
+          <div><strong>90-minute session</strong><p>Covers your workflows, team, and where time gets lost.</p></div>
+        </div>
+        <div class="cal-meta-item">
+          <span class="icon">📋</span>
+          <div><strong>Written Opportunity Map</strong><p>Top 3–5 use cases with effort and cost estimates.</p></div>
+        </div>
+        <div class="cal-meta-item">
+          <span class="icon">🎙️</span>
+          <div><strong>Recorded walkthrough</strong><p>Share the findings with your team or partners.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contact-email">
+    Prefer email? <a href="mailto:contact@danrogers.ai">contact@danrogers.ai</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Dan Rogers · <a href="mailto:contact@danrogers.ai">contact@danrogers.ai</a> · Williamsburg, VA</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Delay-load the assessment calendar so the intro call iframe
+    // has time to fully initialize before the second one starts
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var cal = document.getElementById('cal-assessment');
+        if (cal) {
+          cal.src = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0qZuukkTZaCSzdaaPm2NtTp18hjWKJFKn4BgaPhgpUSWONy0YVdkPfGqdIxtdV4zmF7SA1NNEa?gv=true';
+        }
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
