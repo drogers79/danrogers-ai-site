@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book a Call — Dan Rogers AI Consulting | Williamsburg, VA</title>
-  <meta name="description" content="Book a free 20-minute intro call or an AI Opportunity Assessment with Dan Rogers. No pitch, just honest conversation." />
+  <meta name="description" content="Book a free 20-minute intro call or an AI Opportunity Assessment with Dan Rogers." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
-    /* HERO */
     .contact-hero {
       padding: 10rem 2rem 5rem;
       text-align: center;
@@ -31,27 +30,27 @@
       line-height: 1.75;
     }
 
-    /* GRADIENT BRIDGE */
-    .section-bridge {
-      height: 60px;
-      background: linear-gradient(to bottom, var(--navy), #f8f9fb);
-    }
-
-    /* BOOKING SECTIONS */
-    .booking-block {
+    /* Identical structure to the working diagnostic page */
+    .contact-body {
       background: #f8f9fb;
-      padding: 4rem 2rem 5rem;
+      border-top: 1px solid #e2e8f0;
+      padding: 5rem 2rem;
     }
-    .booking-block + .booking-block {
-      border-top: 2px solid #e2e8f0;
-    }
-    .booking-inner {
-      max-width: 860px;
+    .contact-body-inner {
+      max-width: 900px;
       margin: 0 auto;
     }
-
-    /* LABELS */
-    .booking-tag {
+    .cal-block {
+      margin-bottom: 5rem;
+      padding-bottom: 5rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .cal-block:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .cal-tag {
       display: inline-block;
       font-size: 0.72rem;
       font-weight: 700;
@@ -61,89 +60,75 @@
       border-radius: 100px;
       margin-bottom: 0.75rem;
     }
-    .booking-tag.free {
+    .cal-tag.free {
       color: #059669;
       background: #d1fae5;
       border: 1px solid #6ee7b7;
     }
-    .booking-tag.paid {
+    .cal-tag.paid {
       color: #1d4ed8;
       background: #dbeafe;
       border: 1px solid #93c5fd;
     }
-
-    .booking-heading {
+    .cal-block h2 {
       font-size: 1.7rem;
       font-weight: 800;
       color: #0a0f1e;
       letter-spacing: -0.025em;
       margin-bottom: 0.5rem;
-      line-height: 1.2;
     }
-    .booking-subtext {
+    .cal-block p.desc {
       font-size: 0.95rem;
       color: #4b5563;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       line-height: 1.7;
       max-width: 600px;
     }
-
-    /* IFRAME — explicit dimensions required due to global CSS reset */
-    .booking-inner iframe {
+    .cal-block iframe {
       display: block;
-      width: 100% !important;
-      height: 600px !important;
-      min-height: 600px;
-      background: #fff;
-      border: 1px solid #e2e8f0 !important;
+      width: 100%;
+      height: 600px;
+      background: white;
     }
-
-    /* CONTEXT ITEMS */
-    .what-next {
+    .cal-meta {
       display: flex;
-      gap: 1.25rem;
-      margin-top: 1.5rem;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
       flex-wrap: wrap;
     }
-    .next-item {
+    .cal-meta-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.65rem;
-      flex: 1;
-      min-width: 160px;
+      gap: 0.6rem;
+      min-width: 150px;
     }
-    .next-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
+    .cal-meta-item span.icon { font-size: 1rem; margin-top: 2px; }
+    .cal-meta-item strong {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #374151;
     }
-    .next-item p {
-      font-size: 0.82rem;
+    .cal-meta-item p {
+      font-size: 0.8rem;
       color: #6b7280;
       line-height: 1.5;
       margin: 0;
     }
-    .next-item strong {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 0.15rem;
-    }
 
-    /* EMAIL + FOOTER */
-    .email-section {
+    .email-row {
       background: var(--navy-mid);
       border-top: 1px solid rgba(255,255,255,0.06);
       padding: 2.5rem 2rem;
       text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray-400);
     }
-    .email-section p { font-size: 0.9rem; color: var(--gray-400); }
-    .email-section a { color: var(--accent-bright); }
+    .email-row a { color: var(--accent-bright); }
 
     @media (max-width: 640px) {
-      .booking-block { padding: 3rem 1.25rem 3.5rem; }
-      .what-next { flex-direction: column; }
+      .contact-body { padding: 3rem 1.25rem; }
+      .cal-meta { flex-direction: column; }
     }
   </style>
 </head>
@@ -171,12 +156,13 @@
     </p>
   </section>
 
-  <div class="section-bridge"></div>
+  <!-- CALENDARS — same structure as working diagnostic -->
+  <div class="contact-body">
+    <div class="contact-body-inner">
 
-  <!-- FREE INTRO CALL -->
-  <div class="booking-block" id="intro">
-    <div class="booking-inner">
-      <span class="booking-tag free">Free · 20 Minutes · No Obligation</span>
-      <h2 class="booking-heading">Start With a Free Intro Call</h2>
-      <p class="booking-subtext">
-        We'
+      <div class="cal-block" id="intro">
+        <span class="cal-tag free">Free · 20 Minutes · No Obligation</span>
+        <h2>Start With a Free Intro Call</h2>
+        <p class="desc">We'll talk through your business, where your time goes, and whether AI is genuinely a fit for you right now. If it's not the right time, I'll tell you that too. No pitch, no agenda — just an honest conversation.</p>
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedule
