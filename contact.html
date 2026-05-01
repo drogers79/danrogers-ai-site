@@ -10,11 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
+    /* HERO */
     .contact-hero {
       padding: 10rem 2rem 5rem;
       text-align: center;
     }
-
     .contact-hero h1 {
       font-size: clamp(1.9rem, 4vw, 3rem);
       font-weight: 800;
@@ -23,7 +23,6 @@
       max-width: 640px;
       margin: 0 auto 1.25rem;
     }
-
     .contact-hero p {
       font-size: 1.05rem;
       color: var(--gray-300);
@@ -32,25 +31,26 @@
       line-height: 1.75;
     }
 
+    /* GRADIENT BRIDGE */
     .section-bridge {
       height: 60px;
       background: linear-gradient(to bottom, var(--navy), #f8f9fb);
     }
 
+    /* BOOKING SECTIONS */
     .booking-block {
       background: #f8f9fb;
       padding: 4rem 2rem 5rem;
     }
-
     .booking-block + .booking-block {
       border-top: 2px solid #e2e8f0;
     }
-
     .booking-inner {
       max-width: 860px;
       margin: 0 auto;
     }
 
+    /* LABELS */
     .booking-tag {
       display: inline-block;
       font-size: 0.72rem;
@@ -61,13 +61,11 @@
       border-radius: 100px;
       margin-bottom: 0.75rem;
     }
-
     .booking-tag.free {
       color: #059669;
       background: #d1fae5;
       border: 1px solid #6ee7b7;
     }
-
     .booking-tag.paid {
       color: #1d4ed8;
       background: #dbeafe;
@@ -82,7 +80,6 @@
       margin-bottom: 0.5rem;
       line-height: 1.2;
     }
-
     .booking-subtext {
       font-size: 0.95rem;
       color: #4b5563;
@@ -91,25 +88,21 @@
       max-width: 600px;
     }
 
-    /* NO overflow:hidden, NO border-radius on iframe wrappers */
-    .calendar-frame {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      padding: 6px;
-    }
-
-    .calendar-frame iframe {
+    /* IFRAME — no wrapper div, styled directly */
+    .booking-inner iframe {
       display: block;
       width: 100%;
+      background: #fff;
+      border: 1px solid #e2e8f0;
     }
 
+    /* CONTEXT ITEMS */
     .what-next {
       display: flex;
       gap: 1.25rem;
       margin-top: 1.5rem;
       flex-wrap: wrap;
     }
-
     .next-item {
       display: flex;
       align-items: flex-start;
@@ -117,20 +110,17 @@
       flex: 1;
       min-width: 160px;
     }
-
     .next-icon {
       font-size: 1.1rem;
       flex-shrink: 0;
       margin-top: 0.1rem;
     }
-
     .next-item p {
       font-size: 0.82rem;
       color: #6b7280;
       line-height: 1.5;
       margin: 0;
     }
-
     .next-item strong {
       display: block;
       font-size: 0.85rem;
@@ -139,21 +129,15 @@
       margin-bottom: 0.15rem;
     }
 
+    /* EMAIL + FOOTER */
     .email-section {
       background: var(--navy-mid);
       border-top: 1px solid rgba(255,255,255,0.06);
       padding: 2.5rem 2rem;
       text-align: center;
     }
-
-    .email-section p {
-      font-size: 0.9rem;
-      color: var(--gray-400);
-    }
-
-    .email-section a {
-      color: var(--accent-bright);
-    }
+    .email-section p { font-size: 0.9rem; color: var(--gray-400); }
+    .email-section a { color: var(--accent-bright); }
 
     @media (max-width: 640px) {
       .booking-block { padding: 3rem 1.25rem 3.5rem; }
@@ -179,8 +163,9 @@
     <div class="hero-eyebrow">Let's Talk</div>
     <h1>Two Ways to <span class="highlight">Get Started</span></h1>
     <p>
-      Not sure if AI is right for your business? Start with the free call — 20 minutes,
-      honest answers, zero obligation. Already convinced? Book the Assessment directly below.
+      Not sure if AI is right for your business? Start with the free call —
+      20 minutes, honest answers, zero obligation. Already convinced?
+      Book the Assessment directly below.
     </p>
   </section>
 
@@ -192,5 +177,5 @@
       <span class="booking-tag free">Free · 20 Minutes · No Obligation</span>
       <h2 class="booking-heading">Start With a Free Intro Call</h2>
       <p class="booking-subtext">
-        We'll talk through your business, where your time goes, and whether AI is genuinely
-        a fit for you right now. If it's not the right
+        We'll talk through your business, where your time goes, and whether AI is
+        genuinely a fit for y
