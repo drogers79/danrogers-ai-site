@@ -377,7 +377,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <button class="btn-next" id="next-1" onclick="nextQuestion(1)">Next →</button>
+        <button class="btn-next" id="next-1">Next →</button>
       </div>
     </div>
 
@@ -403,7 +403,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <button class="btn-next" id="next-2" onclick="nextQuestion(2)">Next →</button>
+        <button class="btn-next" id="next-2">Next →</button>
       </div>
     </div>
 
@@ -426,7 +426,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <button class="btn-next" id="next-3" onclick="nextQuestion(3)">Next →</button>
+        <button class="btn-next" id="next-3">Next →</button>
       </div>
     </div>
 
@@ -452,7 +452,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <button class="btn-next" id="next-4" onclick="nextQuestion(4)">Next →</button>
+        <button class="btn-next" id="next-4">Next →</button>
       </div>
     </div>
 
@@ -475,7 +475,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <button class="btn-next" id="next-5" onclick="showResults()">See My Results →</button>
+        <button class="btn-next" id="next-5">See My Results →</button>
       </div>
     </div>
 
@@ -509,35 +509,51 @@
     const answers = {};
 
     // Option selection
-    document.querySelectorAll('.option').forEach(btn => {
+    document.querySelectorAll('.option').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        const q = this.dataset.q;
-        // Deselect others in same question
-        document.querySelectorAll(`.option[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+        var q = this.dataset.q;
+        document.querySelectorAll('.option[data-q="' + q + '"]').forEach(function(b) {
+          b.classList.remove('selected');
+        });
         this.classList.add('selected');
         answers[q] = this.dataset.val;
-        // Enable next button
-        const nextBtn = document.getElementById(`next-${q}`);
+        var nextBtn = document.getElementById('next-' + q);
         if (nextBtn) nextBtn.classList.add('enabled');
       });
     });
 
-    function nextQuestion(current) {
-      if (!answers[current]) return;
-      document.getElementById(`q${current}`).classList.remove('active');
-      document.getElementById(`q${current + 1}`).classList.add('active');
-      updateProgress(current + 1);
+    // Next button wiring
+    for (var i = 1; i <= 4; i++) {
+      (function(step) {
+        var btn = document.getElementById('next-' + step);
+        if (btn) {
+          btn.addEventListener('click', function() {
+            if (!answers[String(step)]) return;
+            document.getElementById('q' + step).classList.remove('active');
+            document.getElementById('q' + (step + 1)).classList.add('active');
+            updateProgress(step + 1);
+          });
+        }
+      })(i);
+    }
+
+    // Results button
+    var resultsBtn = document.getElementById('next-5');
+    if (resultsBtn) {
+      resultsBtn.addEventListener('click', function() {
+        if (!answers['5']) return;
+        doShowResults();
+      });
     }
 
     function updateProgress(step) {
-      const pct = Math.round(((step - 1) / 5) * 100);
+      var pct = Math.round(((step - 1) / 5) * 100);
       document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-label').textContent = `Question ${step} of 5`;
+      document.getElementById('progress-label').textContent = 'Question ' + step + ' of 5';
       document.getElementById('progress-pct').textContent = pct + '% complete';
     }
 
-    function showResults() {
-      if (!answers[5]) return;
+    function doShowResults() {
 
       // Hide last question
       document.getElementById('q5').classList.remove('active');
@@ -548,9 +564,9 @@
       document.getElementById('progress-pct').textContent = '100% complete';
 
       // Compute results
-      const timeArea = answers[2];
-      const priority = answers[4];
-      const aiLevel = answers[3];
+      const timeArea = answers['2'];
+      const priority = answers['4'];
+      const aiLevel = answers['3'];
 
       // Title and summary based on pain point + priority
       let title, summary;
@@ -609,16 +625,4 @@
       document.getElementById('result-title').textContent = title;
       document.getElementById('result-summary').textContent = summary;
 
-      const areaEl = document.getElementById('result-areas');
-      areaEl.innerHTML = areas.map(a => `
-        <div class="area-item">
-          <div class="area-dot"></div>
-          <span>${a}</span>
-        </div>
-      `).join('');
-
-      document.getElementById('results').classList.add('active');
-    }
-  </script>
-</body>
-</html>
+      const areaEl = document.getElementById('resul
