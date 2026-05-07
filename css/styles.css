@@ -361,7 +361,6 @@ section {
   border-top: 1px solid rgba(59,130,246,0.15);
   border-bottom: 1px solid rgba(59,130,246,0.15);
   text-align: center;
-  padding-top: 3rem;
 }
 
 .quiz-cta .section-title {
@@ -371,7 +370,7 @@ section {
 }
 
 .quiz-cta .section-body {
-  margin: 1rem auto 1.5rem;
+  margin: 1rem auto 2.5rem;
   text-align: center;
 }
 
